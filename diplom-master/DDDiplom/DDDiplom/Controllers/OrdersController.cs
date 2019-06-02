@@ -21,7 +21,7 @@ namespace DDDiplom.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Order.ToListAsync());
+            return View(await _context.Orders.ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -32,7 +32,7 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -72,7 +72,7 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -138,15 +138,15 @@ namespace DDDiplom.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Order.FindAsync(id);
-            _context.Order.Remove(order);
+            var order = await _context.Orders.FindAsync(id);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace DDDiplom.Controllers
         // GET: Clients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Client.ToListAsync());
+            return View(await _context.Clients.ToListAsync());
         }
 
         // GET: Clients/Details/5
@@ -32,7 +32,7 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Client
+            var client = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (client == null)
             {
@@ -53,7 +53,7 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Fathername,PhoneNumber")] Client client)
+        public async Task<IActionResult> Create([Bind("Id,Name,Secondname,Surname,PhoneNumber")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Client.FindAsync(id);
+            var client = await _context.Clients.FindAsync(id);
             if (client == null)
             {
                 return NotFound();
@@ -85,7 +85,7 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Fathername,PhoneNumber")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Secondname,Surname,PhoneNumber")] Client client)
         {
             if (id != client.Id)
             {
@@ -123,7 +123,7 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Client
+            var client = await _context.Clients
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (client == null)
             {
@@ -138,15 +138,15 @@ namespace DDDiplom.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var client = await _context.Client.FindAsync(id);
-            _context.Client.Remove(client);
+            var client = await _context.Clients.FindAsync(id);
+            _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClientExists(int id)
         {
-            return _context.Client.Any(e => e.Id == id);
+            return _context.Clients.Any(e => e.Id == id);
         }
     }
 }

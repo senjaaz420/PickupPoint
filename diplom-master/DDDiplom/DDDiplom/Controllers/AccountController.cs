@@ -105,7 +105,7 @@ namespace DIPLOM.Controllers
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
-
+      
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

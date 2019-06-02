@@ -9,8 +9,8 @@ namespace DDDiplom.Models
     {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Secondname { get; set; }
     public string Surname { get; set; }
-    public string Fathername { get; set; }
     public string PhoneNumber { get; set; }
     }
 }

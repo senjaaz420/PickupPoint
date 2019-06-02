@@ -9,22 +9,23 @@ using DDDiplom.Models;
 
 namespace DDDiplom.Controllers
 {
-    public class WorkPlacesController : Controller
+    public class UsersController : Controller
     {
         private readonly DDDiplomContext _context;
 
-        public WorkPlacesController(DDDiplomContext context)
+        public UsersController(DDDiplomContext context)
         {
             _context = context;
         }
 
-        // GET: WorkPlaces
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.WorkPlace.ToListAsync());
+            var dDDiplomContext = _context.Users.Include(u => u.Role).Include(u => u.WorkPlace);
+            return View(await dDDiplomContext.ToListAsync());
         }
 
-        // GET: WorkPlaces/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,45 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var workPlace = await _context.WorkPlace
+            var user = await _context.Users
+                .Include(u => u.Role)
+                .Include(u => u.WorkPlace)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (workPlace == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(workPlace);
+            return View(user);
         }
 
-        // GET: WorkPlaces/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Id");
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id");
             return View();
         }
 
-        // POST: WorkPlaces/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Address")] WorkPlace workPlace)
+        public async Task<IActionResult> Create([Bind("Id,Name,Secondname,Surname,Login,Password,Experience,RoleId,WorkPlaceId")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(workPlace);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(workPlace);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Id", user.RoleId);
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", user.WorkPlaceId);
+            return View(user);
         }
 
-        // GET: WorkPlaces/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +79,24 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var workPlace = await _context.WorkPlace.FindAsync(id);
-            if (workPlace == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(workPlace);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Id", user.RoleId);
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", user.WorkPlaceId);
+            return View(user);
         }
 
-        // POST: WorkPlaces/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Address")] WorkPlace workPlace)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Secondname,Surname,Login,Password,Experience,RoleId,WorkPlaceId")] User user)
         {
-            if (id != workPlace.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -96,12 +105,12 @@ namespace DDDiplom.Controllers
             {
                 try
                 {
-                    _context.Update(workPlace);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WorkPlaceExists(workPlace.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +121,12 @@ namespace DDDiplom.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(workPlace);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Id", user.RoleId);
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", user.WorkPlaceId);
+            return View(user);
         }
 
-        // GET: WorkPlaces/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +134,32 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
-            var workPlace = await _context.WorkPlace
+            var user = await _context.Users
+                .Include(u => u.Role)
+                .Include(u => u.WorkPlace)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (workPlace == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(workPlace);
+            return View(user);
         }
 
-        // POST: WorkPlaces/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var workPlace = await _context.WorkPlace.FindAsync(id);
-            _context.WorkPlace.Remove(workPlace);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool WorkPlaceExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.WorkPlace.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

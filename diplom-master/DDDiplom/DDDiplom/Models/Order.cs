@@ -11,5 +11,6 @@ namespace DDDiplom.Models
      public string IsPaid { get; set; }
      public double Summary { get; set; }
      public DateTime OrderTime { get; set; }
+
     }
 }

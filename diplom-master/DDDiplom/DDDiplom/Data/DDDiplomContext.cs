@@ -14,15 +14,15 @@ namespace DDDiplom.Models
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<Product> Product { get; set; }
-        public DbSet<WorkPlace> WorkPlace { get; set; }
-        public DbSet<Client> Client { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<WorkPlace> WorkPlaces { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Address> Addresses { get; set;  }
         public DbSet<Role> Roles { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = DESKTOP-OJRCM5Q\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer("Server = DESKTOP-ITJHB8V\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
         }
     }
 }
