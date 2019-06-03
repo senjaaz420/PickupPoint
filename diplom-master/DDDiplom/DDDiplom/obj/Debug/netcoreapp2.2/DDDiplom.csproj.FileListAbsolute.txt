@@ -111,8 +111,6 @@ D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcorea
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Account\login.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Create.g.cshtml.cs
-D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Delete.g.cshtml.cs
-D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Details.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Edit.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Orders\Index.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Products\Create.g.cshtml.cs
@@ -140,3 +138,6 @@ D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcorea
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Users\Edit.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Users\Index.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.csprojAssemblyReference.cache
+D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\WorkPlaces\Create.g.cshtml.cs
+D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\WorkPlaces\Edit.g.cshtml.cs
+D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\WorkPlaces\Index.g.cshtml.cs

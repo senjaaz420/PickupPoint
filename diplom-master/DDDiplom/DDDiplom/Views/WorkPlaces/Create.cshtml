@@ -1,0 +1,43 @@
+﻿@model DDDiplom.Models.WorkPlace
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/style.css">
+
+}
+<div id="container">
+    @section WindowName
+{
+        <div class="action-title">
+            <div class="container">
+                <p class="action-text">Окно добавления нового сотрудника</p>
+            </div>
+        </div>
+    }
+<form asp-action="Create" id="form">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label id='lname' asp-for="Name">Название:</label><input type="text" asp-for="Name" id="name"><span asp-validation-for="Name" id="name"></span>
+    </div>
+    <div class="form-group">
+        <label id='lsurname' asp-for="UsersId">Сотрудник:</label><input type="text" asp-for="UsersId" id='surname'><span asp-validation-for="UsersId" id='surname'></span>
+    </div>
+    <div class="form-group">
+        <label id='lpatronymic' asp-for="AddressId">Отчество:</label><input type="text" asp-for="AddressId" id='patronymic'><span asp-validation-for="AddressId" id='patronymic'></span>
+    </div>
+    <input type="submit" id='sbmt-button' value="Сохранить" />
+
+</form>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

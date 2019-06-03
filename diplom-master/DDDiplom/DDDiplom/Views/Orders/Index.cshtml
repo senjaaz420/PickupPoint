@@ -1,47 +1,59 @@
 ﻿@model IEnumerable<DDDiplom.Models.Order>
-
-@{
-    ViewData["Title"] = "Index";
 }
-
-<h1>Заказы</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Summary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Summary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderTime)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@section Styles
+    {
+    <link href="~/css/main.css" rel="stylesheet" />
 }
-    </tbody>
-</table>
+@section WindowName
+{
+    <div class="action-title">
+        <div class="container">
+            <p class="action-text">Окно администратора</p>
+        </div>
+    </div>
+}
+<hr class="nav-line" noshade>
+<div class="act-buttons">
+    <li class='act-button' id='actBackButton'><a asp-action="Index">посмотреть</a></li>
+    <li class='act-button' id='actAddButton'><a asp-action="Create">добавить +</a></li>
+</div>
+<div class="table-search">
+    <input type="text" name="table-search" id="tableSearch">
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Оплачено:
+                    </th>
+                    <th>
+                        Суммарная стоимость:
+                    </th>
+                    <th>
+                        Дата заказа:
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td class='table__name'>
+                        @Html.DisplayFor(modelItem => item.IsPaid)
+                    </td>
+                    <td class='table__name'>
+                        @Html.DisplayFor(modelItem => item.Summary)
+                    </td>
+                    <td class='table__name'>
+                        @Html.DisplayFor(modelItem => item.OrderTime)
+                    </td>
+                    <td>
+                    <td class='table__button'>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Просмотреть</a>                    
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+       </div>
