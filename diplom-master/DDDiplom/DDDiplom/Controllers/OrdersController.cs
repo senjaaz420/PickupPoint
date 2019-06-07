@@ -21,7 +21,8 @@ namespace DDDiplom.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+            var dDDiplomContext = _context.Orders.Include(o => o.WorkPlace);
+            return View(await dDDiplomContext.ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -33,6 +34,7 @@ namespace DDDiplom.Controllers
             }
 
             var order = await _context.Orders
+                .Include(o => o.WorkPlace)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -45,6 +47,7 @@ namespace DDDiplom.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IsPaid,Summary,OrderTime")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,IsPaid,Summary,OrderTime,WorkPlaceId")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace DDDiplom.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
             return View(order);
         }
 
@@ -77,6 +81,7 @@ namespace DDDiplom.Controllers
             {
                 return NotFound();
             }
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
             return View(order);
         }
 
@@ -85,7 +90,7 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IsPaid,Summary,OrderTime")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IsPaid,Summary,OrderTime,WorkPlaceId")] Order order)
         {
             if (id != order.Id)
             {
@@ -112,6 +117,7 @@ namespace DDDiplom.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
             return View(order);
         }
 
@@ -124,6 +130,7 @@ namespace DDDiplom.Controllers
             }
 
             var order = await _context.Orders
+                .Include(o => o.WorkPlace)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {

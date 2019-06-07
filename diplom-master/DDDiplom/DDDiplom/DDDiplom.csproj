@@ -5,6 +5,25 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\Clients\**" />
+    <Compile Remove="Views\Orders\**" />
+    <Compile Remove="Views\Users\**" />
+    <Compile Remove="Views\WorkPlaces\**" />
+    <Content Remove="Views\Clients\**" />
+    <Content Remove="Views\Orders\**" />
+    <Content Remove="Views\Users\**" />
+    <Content Remove="Views\WorkPlaces\**" />
+    <EmbeddedResource Remove="Views\Clients\**" />
+    <EmbeddedResource Remove="Views\Orders\**" />
+    <EmbeddedResource Remove="Views\Users\**" />
+    <EmbeddedResource Remove="Views\WorkPlaces\**" />
+    <None Remove="Views\Clients\**" />
+    <None Remove="Views\Orders\**" />
+    <None Remove="Views\Users\**" />
+    <None Remove="Views\WorkPlaces\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -16,6 +35,22 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Clients\Details.cshtml" />
+    <None Include="Views\Orders\Delete.cshtml" />
+    <None Include="Views\Orders\Details.cshtml" />
+    <None Include="Views\Users\Delete.cshtml" />
+    <None Include="Views\Users\Details.cshtml" />
+    <None Include="Views\WorkPlaces\Delete.cshtml" />
+    <None Include="Views\WorkPlaces\Details.cshtml" />
   </ItemGroup>
 
 </Project>

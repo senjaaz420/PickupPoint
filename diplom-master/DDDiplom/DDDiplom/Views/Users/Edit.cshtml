@@ -1,57 +1,41 @@
 ﻿@model DDDiplom.Models.User
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Edit";
 }
 
-@section Styles
-{
-    <link rel="stylesheet" href="~/css/style.css">
+<h1>Edit</h1>
 
-}
-<div id="container">
-    @section WindowName
-{
-        <div class="action-title">
-            <div class="container">
-                <p class="action-text">Редактирование данных о сотруднике</p>
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Login" class="control-label"></label>
+                <input asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
             </div>
-        </div>
-    }
-    <hr class="nav-line" noshade>
-    <form asp-action="Edit" id='form'>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label id='lname' asp-for="Name">Имя:</label><input type="text" asp-for="Name" id="name"><span asp-validation-for="Name" id="name"></span>
-        </div>
-        <div class="form-group">
-            <label id='lsurname' asp-for="Secondname">Фамилия:</label><input type="text" asp-for="Secondname" id='surname'><span asp-validation-for="Secondname" id='surname'></span>
-        </div>
-        <div class="form-group">
-            <label id='lpatronymic' asp-for="Surname">Отчество:</label><input type="text" asp-for="Surname" id='patronymic'><span asp-validation-for="Surname" id='patronymic'></span>
-        </div>
-        <div class="form-group">
-            <label id='lpvz' asp-for="Login">Логин:</label><input type="text" asp-for="Login" id='pvz'><span asp-validation-for="Login" id='pvz'></span>
-        </div>
-        <div class="form-group">
-            <label id='lpvz' asp-for="Password">Пароль:</label><input type="text" asp-for="Password" id='pvz'><span asp-validation-for="Password" id='pvz'></span>
-        </div>
-        <div class="form-group">
-            <label id='lexperience' asp-for="Experience">Стаж работы:</label><input type="text" asp-for="Experience" id='experience'><span asp-validation-for="Experience" id='experience'></span>
-        </div>
-        <div class="form-group">
-            <label id='lpvz' asp-for="Role">Должность:</label><input type="text" asp-for="Role" id='pvz'><span asp-validation-for="Role" id='pvz'></span>
-        </div>
-        <div class="form-group">
-            <label id='lpvz' asp-for="WorkPlace">Рабочее место:</label><input type="text" asp-for="WorkPlace" id='pvz'><span asp-validation-for="WorkPlace" id='pvz'></span>
-        </div>
-        <input type="submit" id='sbmt-button' value="Сохранить" />
-
-    </form>
-    <form asp-action="Delete" id="form">
-        <br>
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалить сотрудника" id='sbmt-button' />
-    </form>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

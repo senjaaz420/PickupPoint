@@ -21,8 +21,7 @@ namespace DDDiplom.Controllers
         // GET: WorkPlaces
         public async Task<IActionResult> Index()
         {
-            var dDDiplomContext = _context.WorkPlaces.Include(w => w.Address);
-            return View(await dDDiplomContext.ToListAsync());
+            return View(await _context.WorkPlaces.ToListAsync());
         }
 
         // GET: WorkPlaces/Details/5
@@ -34,7 +33,6 @@ namespace DDDiplom.Controllers
             }
 
             var workPlace = await _context.WorkPlaces
-                .Include(w => w.Address)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (workPlace == null)
             {
@@ -47,7 +45,6 @@ namespace DDDiplom.Controllers
         // GET: WorkPlaces/Create
         public IActionResult Create()
         {
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id");
             return View();
         }
 
@@ -56,7 +53,7 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,UsersId,AddressId")] WorkPlace workPlace)
+        public async Task<IActionResult> Create([Bind("Id,Name")] WorkPlace workPlace)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +61,6 @@ namespace DDDiplom.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", workPlace.AddressId);
             return View(workPlace);
         }
 
@@ -81,7 +77,6 @@ namespace DDDiplom.Controllers
             {
                 return NotFound();
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", workPlace.AddressId);
             return View(workPlace);
         }
 
@@ -90,7 +85,7 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UsersId,AddressId")] WorkPlace workPlace)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] WorkPlace workPlace)
         {
             if (id != workPlace.Id)
             {
@@ -117,7 +112,6 @@ namespace DDDiplom.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "Id", "Id", workPlace.AddressId);
             return View(workPlace);
         }
 
@@ -130,7 +124,6 @@ namespace DDDiplom.Controllers
             }
 
             var workPlace = await _context.WorkPlaces
-                .Include(w => w.Address)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (workPlace == null)
             {

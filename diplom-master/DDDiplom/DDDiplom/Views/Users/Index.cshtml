@@ -1,75 +1,47 @@
 ﻿@model IEnumerable<DDDiplom.Models.User>
 
-
 @{
     ViewData["Title"] = "Index";
 }
-@section Styles
-    {
-    <link href="~/css/main.css" rel="stylesheet" />
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
 }
-@section WindowName
-{ 
-<div class="action-title">
-    <div class="container">
-        <p class="action-text">Окно администратора</p>
-    </div>
-</div>
-}
-<hr class="nav-line" noshade>
-<div class="act-buttons">
-    <li class='act-button' id='actBackButton'><a asp-action="Index">посмотреть</a></li>
-    <li class='act-button' id='actAddButton'><a asp-action="Create">добавить +</a></li>
-</div>
-<div class="table-search">
-    <input type="text" name="table-search" id="tableSearch">
-</div>
-<div class="table-wrapper">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class='table__name'>
-                  Имя
-                </th>
-                <th class='table__lname'>
-                   Фамилия
-                </th>
-                <th class='table__sname'>
-                  Отчетсво
-                </th>
-                <th class='table__exp'>
-                  Стаж
-                </th>
-                <th class='table__pickup-point'>
-                  Место работы
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td class='table__name'>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td class='table__lname'>
-                    @Html.DisplayFor(modelItem => item.Secondname)
-                </td>
-                <td class='table__sname'>
-                    @Html.DisplayFor(modelItem => item.Surname)
-                </td>
-                <td class='table__exp'>
-                    @Html.DisplayFor(modelItem => item.Experience)
-                </td>
-                <td class='table__pickup-point'>
-                    @Html.DisplayFor(modelItem => item.WorkPlace.Name)
-                </td>
-                <td class='table__button'>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Просмотреть</a>
-                </td>          
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+    </tbody>
+</table>
