@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DDDiplom.Models.Order>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+@section Styles
+    {
+    <link href="~/css/main.css" rel="stylesheet" />
+}
+@section WindowName
+{
+    <div class="action-title">
+        <div class="container">
+            <p class="action-text">Отчёт</p>
+        </div>
+    </div>
+}
+<hr class="nav-line" noshade>
+
+<div class="table-search">
+    <input type="text" name="table-search" id="tableSearch">
+</div>
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class='table__name'>
+                    Номер:
+                </th>
+                <th class='table__lname'>
+                    Клиент:
+                </th>
+                <th class='table__sname'>
+                    Итого:
+                </th>
+                <th class='table__sname'>
+                    Выдано:
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class='table__name'>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class='table__lname'>
+                    @Html.DisplayFor(modelItem => item.Client.Surname) @Html.DisplayFor(modelItem => item.Client.Name) @Html.DisplayFor(modelItem => item.Client.Secondname)
+                </td>
+                <td class='table__sname'>
+                    @Html.DisplayFor(modelItem => item.Summary) руб.
+                </td>
+                <td class='table__sname'>
+                    @Html.DisplayFor(modelItem => item.IsPaid)
+                </td>
+                
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

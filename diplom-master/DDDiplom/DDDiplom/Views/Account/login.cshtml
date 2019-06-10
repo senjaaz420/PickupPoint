@@ -8,12 +8,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
     <link href="~/css/index.css" rel="stylesheet" />
-    <link href="~/css/main.css" rel="stylesheet" />
+
 </head>
 <body>
     <main class='main test'>
@@ -21,12 +17,10 @@
             <div class="validation" asp-validation-summary="ModelOnly" />
             <p class="login__title">авторизация</p>
             <label for="login">Login</label>
-            <input asp-for="Login" type="text" name='login' >
-            <span asp-validation-for="Login" />
+            <input type="text" name='login'>
             <label for="password">Password</label>
-            <input asp-for="Password" type="password" name="password" >
-            <span asp-validation-for="Password" />  
-            <button type="submit" class="login__button">Вход</button>
+            <input type="password" name="password">
+            <button type="submit" formmethod="post" class="login__button">Вход</button>
         </form>
     </main>
 </body>

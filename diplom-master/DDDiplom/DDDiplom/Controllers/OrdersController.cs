@@ -17,11 +17,16 @@ namespace DDDiplom.Controllers
         {
             _context = context;
         }
-
+        [HttpGet]
+        public async Task<IActionResult> Report()
+        {
+            var dDDiplomContext = _context.Orders.Where(o => o.IsPaid == "да").Include(o => o.Client);
+            return View(await dDDiplomContext.ToListAsync());
+        }
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var dDDiplomContext = _context.Orders.Include(o => o.WorkPlace);
+            var dDDiplomContext = _context.Orders.Include(o => o.Client).Include(o => o.WorkPlace).Where(o => o.IsPaid =="нет");
             return View(await dDDiplomContext.ToListAsync());
         }
 
@@ -35,6 +40,8 @@ namespace DDDiplom.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.WorkPlace)
+                .Include(o => o.Client)
+                .Include(o =>o.OrderProducts)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -49,6 +56,50 @@ namespace DDDiplom.Controllers
         {
             ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id");
             return View();
+        }
+
+        public IActionResult Export(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = _context.Orders.Find(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Export(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    order.IsPaid = "да";
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OrderExists(order.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
+            return View(order);
         }
 
         // POST: Orders/Create

@@ -60,22 +60,9 @@ namespace DDDiplom.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public Category Category { get; set; }
-        public int CategoryId { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; }
-        public Product()
-        {
-            OrderProducts = new List<OrderProduct>();
-        }
+
     }
 
-    public class OrderProduct
-    {
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
-
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
-    }
     public class Order
     {
         public int Id { get; set; }
@@ -86,10 +73,10 @@ namespace DDDiplom.Models
         public WorkPlace WorkPlace { get; set; }
         public Client Client { get; set; }
         public int ClientId { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; }
+        public List<Product> OrderProducts { get; set; }
         public Order()
         {
-            OrderProducts = new List<OrderProduct>();
+            OrderProducts = new List<Product>();
         }
     }
     public class WorkPlace
@@ -116,12 +103,15 @@ namespace DDDiplom.Models
         public string Secondname { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
-        public Order Order { get; set; }
     }
 
 
     public class DDDiplomContext : DbContext
     {
+        public DDDiplomContext()
+        {
+        }
+
         public DDDiplomContext(DbContextOptions<DDDiplomContext> options)
             : base(options)
         {
@@ -130,7 +120,6 @@ namespace DDDiplom.Models
         public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<WorkPlace> WorkPlaces { get; set; }
@@ -139,22 +128,6 @@ namespace DDDiplom.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server = DESKTOP-ITJHB8V\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OrderProduct>()
-                .HasKey(t => new { t.ProductId, t.OrderId });
-
-            modelBuilder.Entity<OrderProduct>()
-                .HasOne(sc => sc.Order)
-                .WithMany(s => s.OrderProducts)
-                .HasForeignKey(sc => sc.OrderId);
-
-            modelBuilder.Entity<OrderProduct>()
-                .HasOne(sc => sc.Product)
-                .WithMany(c => c.OrderProducts)
-                .HasForeignKey(sc => sc.ProductId);
         }
     }
 }

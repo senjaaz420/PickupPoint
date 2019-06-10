@@ -1,42 +1,49 @@
 ﻿@model DDDiplom.Models.Order
 
-@{
-    ViewData["Title"] = "Details";
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/style.css">
+
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Order</h4>
-    <hr />
+<div id="container">
+    @section WindowName
+{
+        <div class="action-title">
+            <div class="container">
+                <p class="action-text" style="text-align: center">Заказ № @Html.DisplayFor(model => model.Id)</p>
+            </div>
+        </div>
+    }
+    <hr class="nav-line" noshade>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsPaid)
+
+        <dt class="col-sm-2" id="name">
+            Клиент:  @Html.DisplayFor(model => model.Client.Surname) @Html.DisplayFor(model => model.Client.Name) @Html.DisplayFor(model => model.Client.Secondname)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsPaid)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Summary)
+        <dt class="col-sm-2" id="name">
+            Номер телефона:  @Html.DisplayFor(model => model.Client.PhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Summary)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderTime)
+        <dt class="col-sm-2" id="name">
+            Оплачено:  @Html.DisplayFor(model => model.IsPaid)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkPlace)
+        <dt class="col-sm-2" id="name">
+            Время заказа: @Html.DisplayFor(model => model.OrderTime)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WorkPlace.Id)
-        </dd>
+        <dt class="col-sm-2" id="name">
+            @Html.DisplayFor(model => model.WorkPlace.Name)
+        </dt>
+        <dt class="col-sm-2" id="name">
+            Итого: @Html.DisplayFor(model => model.Summary) руб.
+        </dt>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <form asp-action="Export" id="form">
+        <br>
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" style="text-align:center" value="Пометить как переданный клиенту" id='sbmt-button' />
+    </form>
+    <a asp-action="Index">
+        <input type="submit" value="Назад" id='sbmt-button' />
+    </a>
 </div>

@@ -1,51 +1,49 @@
 ﻿@model DDDiplom.Models.UserProfile
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Edit</h1>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/style.css">
 
-<h4>UserProfile</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+}
+<div id="container">
+    @section WindowName
+{
+        <div class="action-title">
+            <div class="container">
+                <p class="action-text">Редактирование данных о сотруднике</p>
             </div>
-            <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Patronymic" class="control-label"></label>
-                <input asp-for="Patronymic" class="form-control" />
-                <span asp-validation-for="Patronymic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Experience" class="control-label"></label>
-                <input asp-for="Experience" class="form-control" />
-                <span asp-validation-for="Experience" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkPlaceId" class="control-label"></label>
-                <select asp-for="WorkPlaceId" class="form-control" asp-items="ViewBag.WorkPlaceId"></select>
-                <span asp-validation-for="WorkPlaceId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+    }
+    <hr class="nav-line" noshade>
+    <form asp-action="Edit" id='form'>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label id='lname' asp-for="Name">Имя:</label><input type="text" asp-for="Name" id="name"><span asp-validation-for="Name" id="name"></span>
+        </div>
+        <div class="form-group">
+            <label id='lsurname' asp-for="Surname">Фамилия:</label><input type="text" asp-for="Surname" id='surname'><span asp-validation-for="Surname" id='surname'></span>
+        </div>
+        <div class="form-group">
+            <label id='lpatronymic' asp-for="Patronymic">Отчество:</label><input type="text" asp-for="Patronymic" id='patronymic'><span asp-validation-for="Patronymic" id='patronymic'></span>
+        </div>
+        <div class="form-group">
+            <label id='lexperience' asp-for="Experience">Стаж работы:</label><input type="text" asp-for="Experience" id='experience'><span asp-validation-for="Experience" id='experience'></span>
+        </div>
+        <div class="form-group">
+            <label id='lpvz' asp-for="WorkPlace.Id">Рабочее место №:</label><input type="text" asp-for="WorkPlace.Id" id='pvz'><span asp-validation-for="WorkPlace.Id" id='pvz'></span>
+        </div>
+   
+        <input type="submit" id='sbmt-button' value="Сохранить" />
+
+    </form>
+    <form asp-action="Delete" id="form">
+        <br>
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Удалить" id='sbmt-button' />
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

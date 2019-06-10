@@ -7,7 +7,6 @@
     @RenderSection("Styles", false)
     <link rel="stylesheet" href="~/css/main.css" />
     <script src="~/js/main.js"></script>
-   
 </head>
 <body>
     <header class="header">
@@ -24,14 +23,14 @@
             <nav class="nav">
                 @if (User.IsInRole("admin"))
                 {
-                    <li class="nav__item"><a id='employees' asp-area="" asp-controller="Users" asp-action="Index">сотрудники</a></li>
+                    <li class="nav__item"><a id='employees' asp-area="" asp-controller="UserProfiles" asp-action="Index">сотрудники</a></li>
                     <li class="nav__item"><a id='issuePoints' asp-area="" asp-controller="WorkPlaces" asp-action="Index">пункты выдачи</a></li>
-                    <li class="nav__item"><a id='generateReport' class="nav__item--link" href="#">сформировать отчет</a></li>
+                    <li class="nav__item"><a id='generateReport' class="nav__item--link" asp-area="" asp-controller="Reports" asp-action="Index">сформировать отчет</a></li>
                 }
                 else if (User.IsInRole("user"))
                 {
                     <li class="nav__item"><a id='issuePoints' asp-area="" asp-controller="Orders" asp-action="Index">заказы</a></li>
-                    <li class="nav__item"><a id='generateReport' class="nav__item--link" href="#">сформировать отчет</a></li>
+                    <li class="nav__item"><a id='generateReport' class="nav__item--link" asp-area="" asp-controller="Reports" asp-action="Index">сформировать отчет</a></li>
                 }
 
             </nav>
