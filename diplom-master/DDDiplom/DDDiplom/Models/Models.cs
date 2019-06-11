@@ -127,7 +127,7 @@ namespace DDDiplom.Models
         public DbSet<Client> Clients { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = DESKTOP-ITJHB8V\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer("Server = DESKTOP-IIPACAR\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using DDDiplom.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +12,15 @@ namespace DDDiplom.Services.GenerationRandomOrders
     {
         private Random r = new Random();
 
+        private string Names = "../DDDiplom/wwwroot/txt/Names.txt";
+        private string SurNames = "../DDDiplom/wwwroot/txt/SurNames.txt";
+        private string SecondNames = "../DDDiplom/wwwroot/txt/SecondNames.txt";
 
         public GenerationRandomOrders()
         {
 
             var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromMinutes(10);
+            var periodTimeSpan = TimeSpan.FromSeconds(1);
 
             var timer = new System.Threading.Timer((e) =>
             {
@@ -25,6 +29,14 @@ namespace DDDiplom.Services.GenerationRandomOrders
         }
 
 
+        private string GetRandomStringFromFile(string fileName)
+        {
+            var file = File.ReadLines(fileName).ToList();
+            int count = file.Count();
+            int skip = r.Next(0, count);
+            string line = file.Skip(skip).First();
+            return line;
+        }
 
         public void Generate()
         {
@@ -34,40 +46,24 @@ namespace DDDiplom.Services.GenerationRandomOrders
 
             using (DDDiplomContext db = new DDDiplomContext())
             {
-                int _Id = 0;
-
-
-                var buf = db.Orders.LastOrDefault();
-                if (buf != null)
-                    _Id = buf.Id;
-                else
-                    _Id = 1;
 
                 for (int i = 0; i < r.Next(1,9); i++)
                 {
-                    var count = db.Products.Count() > 0 ? db.Products.Count() : 2;
-                    var randromId = r.Next(db.Products.FirstOrDefault().Id, db.Products.FirstOrDefault().Id + count);
-                    randomItem = db.Products.FirstOrDefault(x=>x.Id == randromId);
+                    randomItem = db.Products.ToArray()[r.Next(db.Products.Count())];
                     goodsList.Add(randomItem);
                 }
-
 
                 int clientId = r.Next(1, 99999);
                 Client client = new Client
                 {
                     //Id = clientId,
-                    Name = "Clien" + clientId.ToString(),
-                    Surname = "bb",
-                    Secondname = "tt",
+                    Name = GetRandomStringFromFile(Names),
+                    Surname = GetRandomStringFromFile(SurNames),
+                    Secondname = GetRandomStringFromFile(SecondNames),
                     PhoneNumber = "+37529" + r.Next(1111111, 9999999).ToString()
                 };
 
-                var workPaceBuf = db.WorkPlaces.FirstOrDefault();
-                int firstWorkPlaceId = workPaceBuf != null ? workPaceBuf.Id : 1;
-                int lastWorkPlaceId = firstWorkPlaceId + db.WorkPlaces.Count();
-                var randomId = r.Next(firstWorkPlaceId, lastWorkPlaceId);
-
-                WorkPlace workPlace = db.WorkPlaces.FirstOrDefault(x=> x.Id == randomId);
+                WorkPlace workPlace = db.WorkPlaces.ToArray()[r.Next(db.WorkPlaces.Count())];
 
                 Order order = new Order
                 {

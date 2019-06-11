@@ -133,3 +133,44 @@ D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcorea
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\UserProfiles\Index.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\WorkPlaces\Index.g.cshtml.cs
 D:\GITHUB REPOS\diplom-master\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Reports\Index.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.deps.json
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.runtimeconfig.json
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.runtimeconfig.dev.json
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.dll
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.pdb
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.Views.dll
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\bin\Debug\netcoreapp2.2\DDDiplom.Views.pdb
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.csprojAssemblyReference.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.csproj.CoreCompileInputs.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.RazorAssemblyInfo.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.RazorAssemblyInfo.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.AssemblyInfoInputs.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.AssemblyInfo.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.TagHelpers.input.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.TagHelpers.output.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.RazorCoreGenerate.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Account\login.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Addresses\Create.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Addresses\Delete.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Addresses\Details.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Addresses\Edit.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Addresses\Index.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Reports\Index.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\UserProfiles\Create.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\UserProfiles\Delete.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\UserProfiles\Edit.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\UserProfiles\Index.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\Razor\Views\WorkPlaces\Index.g.cshtml.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.RazorTargetAssemblyInfo.cache
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.RazorTargetAssemblyInfo.cs
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.Views.pdb
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.dll
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.pdb
+D:\REPOSITORY\PickupPoint\diplom-master\DDDiplom\DDDiplom\obj\Debug\netcoreapp2.2\DDDiplom.csproj.CopyComplete
