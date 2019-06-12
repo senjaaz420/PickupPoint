@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DDDiplom.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DDDiplom.Controllers
 {
@@ -26,7 +27,13 @@ namespace DDDiplom.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var dDDiplomContext = _context.Orders.Include(o => o.Client).Include(o => o.WorkPlace).Where(o => o.IsPaid =="нет");
+            var User = _context.UserProfiles.FirstOrDefault(o => o.UserId == Convert.ToInt32(HttpContext.User.Identity.Name));
+
+            var dDDiplomContext = _context.Orders
+                .Include(o => o.Client)
+                .Include(o => o.WorkPlace)
+                .Where(o => o.IsPaid =="нет")
+                .Where(o => o.WorkPlaceId == User.WorkPlaceId);
             return View(await dDDiplomContext.ToListAsync());
         }
 
@@ -76,13 +83,13 @@ namespace DDDiplom.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Export(Order order)
+        public IActionResult Export(Order order, int Id)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    order.IsPaid = "да";
+                    _context.Orders.FirstOrDefault(o => o.Id == Id).IsPaid = "да";
                     _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
