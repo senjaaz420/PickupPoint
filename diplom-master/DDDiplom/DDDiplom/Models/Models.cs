@@ -55,11 +55,21 @@ namespace DDDiplom.Models
         public List<Product> Products { get; set; }
     }
     public class Product
-        {
+    {
         public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public Category Category { get; set; }
+
+    }
+
+    public class ProductList
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public int CategoryId { get; set; }
+        public int OrderdId { get; set; }
 
     }
 
@@ -125,6 +135,7 @@ namespace DDDiplom.Models
         public DbSet<WorkPlace> WorkPlaces { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<ProductList> ProductLists { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server = DESKTOP-IIPACAR\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");

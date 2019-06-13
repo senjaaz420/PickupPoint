@@ -37,6 +37,29 @@
         </dt>
     </dl>
 </div>
+
+<table>
+
+    <tr>
+        <td>#</td>
+        <td>Название</td>
+        <td>Категория</td>
+        <td>Цена</td>
+    </tr>
+
+    @foreach (var item in Model.OrderProducts)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>@item.Category.Name</td>
+        </tr>
+    }
+
+</table>
+
+
 <div>
     <form asp-action="Export" id="form">
         <br>

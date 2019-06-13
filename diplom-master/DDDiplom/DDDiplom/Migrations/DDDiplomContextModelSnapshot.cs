@@ -116,6 +116,27 @@ namespace DDDiplom.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("DDDiplom.Models.ProductList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CategoryId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<double>("Price");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("ProductLists");
+                });
+
             modelBuilder.Entity("DDDiplom.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -216,6 +237,13 @@ namespace DDDiplom.Migrations
                     b.HasOne("DDDiplom.Models.Order")
                         .WithMany("OrderProducts")
                         .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("DDDiplom.Models.ProductList", b =>
+                {
+                    b.HasOne("DDDiplom.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("DDDiplom.Models.User", b =>

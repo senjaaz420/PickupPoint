@@ -68,6 +68,8 @@ namespace DDDiplom.Controllers
                 return NotFound();
             }
 
+            var lst = order.OrderProducts;
+
             return View(order);
         }
 

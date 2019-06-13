@@ -19,14 +19,12 @@
 <hr class="nav-line" noshade>
 
 
-
-<div class="act-buttons">
-    <li class='act-button' id='actBackButton'><a asp-action="Index">посмотреть</a></li>
-    <li class='act-button' id='actAddButton'><a asp-action="Create">добавить +</a></li>
-</div>
-
-
 <form asp-action="Index">
+
+    <div class="act-buttons">
+        <input class='act-button' id='actBackButton' type="submit" value="Посмотреть"/>
+        <li class='act-button' id='actAddButton'><a asp-action="Create">добавить +</a></li>
+    </div>
 
     <select name="AddressesFilter">
         <option value="all">Все адреса</option>
@@ -40,7 +38,6 @@
         <span><input type="datetime-local" name="StartDate" /></span>
         <span><input type="datetime-local" name="EndDate" /></span>
     </div>
-    <input type="submit" Показать />
 
 </form>
 

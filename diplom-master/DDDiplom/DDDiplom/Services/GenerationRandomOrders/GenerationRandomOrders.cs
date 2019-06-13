@@ -20,7 +20,7 @@ namespace DDDiplom.Services.GenerationRandomOrders
         {
 
             var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromSeconds(1);
+            var periodTimeSpan = TimeSpan.FromSeconds(5);
 
             var timer = new System.Threading.Timer((e) =>
             {
@@ -65,20 +65,34 @@ namespace DDDiplom.Services.GenerationRandomOrders
 
                 WorkPlace workPlace = db.WorkPlaces.ToArray()[r.Next(db.WorkPlaces.Count())];
 
+                var clientID = client.Id;
+
                 Order order = new Order
                 {
                     //Id = db.Orders.LastOrDefault().Id + 1,
                     IsPaid = r.Next(1,3) == 1 ? "Да" : "Нет",
                     OrderTime = DateTime.Now,
                     OrderProducts = goodsList,
-                    ClientId = client.Id,
+                    ClientId = clientID,
                     Client = client,
                     Summary = goodsList.Sum(x => x.Price),
                     WorkPlace = workPlace,
                     WorkPlaceId = workPlace.Id
 
                 };
-                db.Orders.Add(order);
+
+                foreach (var item in goodsList)
+                {
+                    db.ProductLists.Add(new ProductList
+                    {
+                        CategoryId = item.Category != null ? item.Category.Id : 0,
+                        Name = item.Name,
+                        OrderdId = clientID,
+                        Price = item.Price
+                    });
+                }
+                
+                //db.Orders.Add(order);
 
                 Debug.WriteLine(DateTime.Now + " New Order was added");
 
