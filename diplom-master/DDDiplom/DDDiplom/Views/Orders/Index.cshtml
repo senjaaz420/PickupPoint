@@ -17,13 +17,35 @@
     </div>
 }
 <hr class="nav-line" noshade>
+
+
+
 <div class="act-buttons">
     <li class='act-button' id='actBackButton'><a asp-action="Index">посмотреть</a></li>
     <li class='act-button' id='actAddButton'><a asp-action="Create">добавить +</a></li>
 </div>
-<div class="table-search">
-    <input type="text" name="table-search" id="tableSearch">
-</div>
+
+
+<form asp-action="Index">
+
+    <select name="AddressesFilter">
+        <option value="all">Все адреса</option>
+        @foreach (var item in ViewBag.Addresses)
+        {
+            <option value="@item">@item</option>
+        }
+    </select>
+
+    <div class="table-search">
+        <span><input type="datetime-local" name="StartDate" /></span>
+        <span><input type="datetime-local" name="EndDate" /></span>
+    </div>
+    <input type="submit" Показать />
+
+</form>
+
+
+
 <div class="table-wrapper">
     <table class="table">
         <thead>
@@ -37,25 +59,38 @@
                 <th class='table__sname'>
                     Итого:
                 </th>
-                <th></th>            </tr>
+                <th class='table__pickup-point'>
+                    Дата:
+                </th>
+                <th class='table__pickup-point'>
+                    Пункт:
+                </th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class='table__name'>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td class='table__lname'>
-                        @Html.DisplayFor(modelItem => item.Client.Surname) @Html.DisplayFor(modelItem => item.Client.Name) @Html.DisplayFor(modelItem => item.Client.Secondname)
-                    </td>
-                    <td class='table__sname'>
-                        @Html.DisplayFor(modelItem => item.Summary) руб.
-                    </td>
-                    <td class='table__button'>
-                        <a asp-action="Details" asp-route-id="@item.Id">Просмотреть</a>
-                    </td>
-                </tr>
+            <tr>
+                <td class='table__name'>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class='table__lname'>
+                    @Html.DisplayFor(modelItem => item.Client.Surname) @Html.DisplayFor(modelItem => item.Client.Name) @Html.DisplayFor(modelItem => item.Client.Secondname)
+                </td>
+                <td class='table__sname'>
+                    @Html.DisplayFor(modelItem => item.Summary) руб.
+                </td>
+                <td class='table__sname'>
+                    @Html.DisplayFor(modelItem => item.OrderTime)
+                </td>
+                <td class='table__pickup-point'>
+                    @Html.DisplayFor(modelItem => item.WorkPlace.Name)
+                </td>
+                <td class='table__button'>
+                    <a asp-action="Details" asp-route-id="@item.Id">Просмотреть</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

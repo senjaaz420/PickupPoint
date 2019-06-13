@@ -19,22 +19,35 @@ namespace DDDiplom.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<IActionResult> Report()
+        public ActionResult Report()
         {
-            var dDDiplomContext = _context.Orders.Where(o => o.IsPaid == "да").Include(o => o.Client);
-            return View(await dDDiplomContext.ToListAsync());
+            var dDDiplomContext = _context.Orders.Where(o => o.IsPaid == "да").Include(o => o.Client).ToList();
+            return View(dDDiplomContext);
         }
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public ActionResult Index(string AddressesFilter = "all", string startDate = "", string endDate = "")
         {
+            startDate = startDate == null ? "" : startDate;
+            endDate = startDate == null ? "" : endDate;
+
+
+            List<string> addresses = _context.Orders.Select(x => x.WorkPlace.Name).Distinct().ToList();
+            ViewBag.Addresses = addresses;
+
             var User = _context.UserProfiles.FirstOrDefault(o => o.UserId == Convert.ToInt32(HttpContext.User.Identity.Name));
 
             var dDDiplomContext = _context.Orders
                 .Include(o => o.Client)
                 .Include(o => o.WorkPlace)
                 .Where(o => o.IsPaid =="нет")
-                .Where(o => o.WorkPlaceId == User.WorkPlaceId);
-            return View(await dDDiplomContext.ToListAsync());
+                .Where(o => o.WorkPlaceId == User.WorkPlaceId)
+                 .Where(x => AddressesFilter != "all" ? x.WorkPlace.Name == AddressesFilter : true).ToList();
+
+            if (startDate != "" && endDate != "")
+                dDDiplomContext = dDDiplomContext.Where(o => o.OrderTime >= DateTime.Parse(startDate) && o.OrderTime <= DateTime.Parse(endDate)).ToList();
+
+
+            return View(dDDiplomContext);
         }
 
         // GET: Orders/Details/5

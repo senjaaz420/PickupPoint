@@ -68,7 +68,7 @@ namespace DDDiplom.Services.GenerationRandomOrders
                 Order order = new Order
                 {
                     //Id = db.Orders.LastOrDefault().Id + 1,
-                    IsPaid = "нет",
+                    IsPaid = r.Next(1,3) == 1 ? "Да" : "Нет",
                     OrderTime = DateTime.Now,
                     OrderProducts = goodsList,
                     ClientId = client.Id,

@@ -22,9 +22,13 @@
     <li class='act-button' id='actAddButton'><a asp-action="Export">Экспортировать в .PDF</a></li>
 </div>
 
-<div class="table-search">
-    <input type="text" name="table-search" id="tableSearch">
-</div>
+<form asp-action="Index">
+    <div class="table-search">
+        <span><input type="datetime-local" name="StartDate" /></span>
+        <span><input type="datetime-local" name="EndDate" /></span>
+    </div>
+    <input type="submit" Показать />
+</form>
 <div class="table-wrapper">
     <table class="table">
         <thead>
@@ -34,6 +38,9 @@
                 </th>
                 <th class='table__lname'>
                     Клиент:
+                </th>
+                <th class='table__lname'>
+                    Дата заказа:
                 </th>
                 <th class='table__sname'>
                     Итого:
@@ -54,12 +61,15 @@
                     @Html.DisplayFor(modelItem => item.Client.Surname) @Html.DisplayFor(modelItem => item.Client.Name) @Html.DisplayFor(modelItem => item.Client.Secondname)
                 </td>
                 <td class='table__sname'>
+                    @Html.DisplayFor(modelItem => item.OrderTime)
+                </td>
+                <td class='table__sname'>
                     @Html.DisplayFor(modelItem => item.Summary) руб.
                 </td>
                 <td class='table__sname'>
                     @Html.DisplayFor(modelItem => item.IsPaid)
                 </td>
-                
+
             </tr>
             }
         </tbody>

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GITHUB REPOS\\diplom-master\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj": {}
+    "D:\\REPOSITORY\\PickupPoint\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj": {}
   },
   "projects": {
-    "D:\\GITHUB REPOS\\diplom-master\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj": {
+    "D:\\REPOSITORY\\PickupPoint\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GITHUB REPOS\\diplom-master\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj",
+        "projectUniqueName": "D:\\REPOSITORY\\PickupPoint\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj",
         "projectName": "DDDiplom",
-        "projectPath": "D:\\GITHUB REPOS\\diplom-master\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj",
-        "packagesPath": "C:\\Users\\Andre\\.nuget\\packages\\",
-        "outputPath": "D:\\GITHUB REPOS\\diplom-master\\diplom-master\\DDDiplom\\DDDiplom\\obj\\",
+        "projectPath": "D:\\REPOSITORY\\PickupPoint\\diplom-master\\DDDiplom\\DDDiplom\\DDDiplom.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\REPOSITORY\\PickupPoint\\diplom-master\\DDDiplom\\DDDiplom\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

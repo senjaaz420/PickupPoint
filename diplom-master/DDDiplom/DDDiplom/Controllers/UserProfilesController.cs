@@ -19,10 +19,18 @@ namespace DDDiplom.Controllers
         }
 
         // GET: UserProfiles
-        public async Task<IActionResult> Index()
+        public ActionResult Index(string AddressesFilter = "all")
         {
-            var dDDiplomContext = _context.UserProfiles.Include(u => u.User).Include(u => u.WorkPlace).Include(u => u.WorkPlace.Address);
-            return View(await dDDiplomContext.ToListAsync());
+            List<string> addresses =  _context.UserProfiles.Select(x => x.WorkPlace.Address.Street).Distinct().ToList();
+            ViewBag.Addresses = addresses;
+
+            List<UserProfile> dDDiplomContext = _context.UserProfiles
+                .Include(u => u.User)
+                .Include(u => u.WorkPlace)
+                .Include(u => u.WorkPlace.Address)
+                .Where(x => AddressesFilter != "all" ? x.WorkPlace.Address.Street == AddressesFilter : true).ToList();
+
+            return View(dDDiplomContext);
         }
 
         // GET: UserProfiles/Details/5
@@ -31,7 +39,7 @@ namespace DDDiplom.Controllers
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id");
+            ViewBag.WorkPlace = new SelectList(_context.WorkPlaces, "Name", "Name");
             return View();
         }
 
@@ -40,11 +48,27 @@ namespace DDDiplom.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Patronymic,Experience,UserId,WorkPlaceId")] UserProfile userProfile)
+        public async Task<IActionResult> Create(UserProfile userProfile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userProfile);
+                //_context.Add(userProfile);
+                _context.Users.Add(new Models.User
+                {
+                    Login = userProfile.User.Login,
+                    Password = userProfile.User.Password,
+                    RoleId = 2
+                });
+
+                _context.UserProfiles.Add(new UserProfile
+                {
+                    Name = userProfile.Name,
+                    Surname = userProfile.Surname,
+                    Patronymic = userProfile.Patronymic,
+                    Experience = userProfile.Experience,
+                    UserId = _context.Users.LastOrDefault().Id,
+                    WorkPlaceId = userProfile.WorkPlace.Id
+                });
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -52,6 +76,7 @@ namespace DDDiplom.Controllers
             ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", userProfile.WorkPlaceId);
             return View(userProfile);
         }
+
 
         // GET: UserProfiles/Edit/5
         public async Task<IActionResult> Edit(int? id)
