@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<DDDiplom.Models.Order>
 
 
-@{
-    ViewData["Title"] = "Index";
-}
 @section Styles
     {
     <link href="~/css/main.css" rel="stylesheet" />
@@ -22,8 +19,7 @@
 <form asp-action="Index">
 
     <div class="act-buttons">
-        <input class='act-button' id='actBackButton' type="submit" value="Посмотреть"/>
-        <li class='act-button' id='actAddButton'><a asp-action="Create">добавить +</a></li>
+    <input class='act-button' id='actBackButton' type="submit" value="Посмотреть" />
     </div>
 
     <select name="AddressesFilter">

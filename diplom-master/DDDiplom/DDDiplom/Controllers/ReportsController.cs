@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DDDiplom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 
 namespace DDDiplom.Controllers
 {
@@ -14,6 +15,14 @@ namespace DDDiplom.Controllers
         private readonly DDDiplomContext _context;
         private DateTime StartDate;
 
+        public ActionResult GeneratePDF()
+        {
+            var dDDiplomContext = _context.Orders
+                   .Include(o => o.Client)
+                   .Include(o => o.WorkPlace)
+                   .Where(o => o.IsPaid == "да");
+            return View(dDDiplomContext);
+        }
         public ReportsController(DDDiplomContext context)
         {
             _context = context;
@@ -28,9 +37,20 @@ namespace DDDiplom.Controllers
 
             if (startDate != "" && endDate != "")
                 dDDiplomContext = dDDiplomContext.Where(o => o.OrderTime >= DateTime.Parse(startDate) && o.OrderTime <= DateTime.Parse(endDate));
-
+            
 
             return View(await dDDiplomContext.ToListAsync());
         }
+        public ActionResult Export()
+        {
+            var dDDiplomContext = _context.Orders
+                   .Include(o => o.Client)
+                   .Include(o => o.WorkPlace)
+                   .Where(o => o.IsPaid == "да");
+
+            return new ViewAsPdf("Export", dDDiplomContext.ToList());
+        }
+
+
     }
 }

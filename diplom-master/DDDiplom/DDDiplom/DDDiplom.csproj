@@ -41,11 +41,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Rotativa.NetCore" Version="1.0.4" />
   </ItemGroup>
 
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="wwwroot\pdf\" />
   </ItemGroup>
 
 
@@ -53,6 +56,7 @@
     <None Include="Views\Clients\Details.cshtml" />
     <None Include="Views\Orders\Delete.cshtml" />
     <None Include="Views\Orders\Details.cshtml" />
+    <None Include="Views\Orders\Export.cshtml" />
     <None Include="Views\Orders\Index.cshtml" />
     <None Include="Views\Reports\Index.cshtml" />
     <None Include="Views\Users\Delete.cshtml" />

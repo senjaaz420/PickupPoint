@@ -1,0 +1,43 @@
+﻿@model DDDiplom.Models.Order
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+@{
+
+    Layout = null;
+}
+<div id="container">
+    @section WindowName
+{
+        <div class="action-title">
+            <div class="container">
+                <p class="action-text" style="text-align: center">Заказ № @Html.DisplayFor(model => model.Id)</p>
+            </div>
+        </div>
+    }
+    <hr class="nav-line" noshade>
+    <dl class="row">
+
+        <dt class="col-sm-2" id="name">
+            Клиент:  @Html.DisplayFor(model => model.Client.Surname) @Html.DisplayFor(model => model.Client.Name) @Html.DisplayFor(model => model.Client.Secondname)
+        </dt>
+        <dt class="col-sm-2" id="name">
+            Номер телефона:  @Html.DisplayFor(model => model.Client.PhoneNumber)
+        </dt>
+        <dt class="col-sm-2" id="name">
+            Оплачено:  @Html.DisplayFor(model => model.IsPaid)
+        </dt>
+        <dt class="col-sm-2" id="name">
+            Время заказа: @Html.DisplayFor(model => model.OrderTime)
+        </dt>
+        <dt class="col-sm-2" id="name">
+            @Html.DisplayFor(model => model.WorkPlace.Name)
+        </dt>
+        <dt class="col-sm-2" id="name">
+            Итого: @Html.DisplayFor(model => model.Summary) руб.
+        </dt>
+    </dl>
+</div>

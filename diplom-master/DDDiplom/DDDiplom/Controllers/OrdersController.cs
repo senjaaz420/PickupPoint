@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DDDiplom.Models;
 using Microsoft.AspNetCore.Http;
+using Rotativa.AspNetCore;
 
 namespace DDDiplom.Controllers
 {
@@ -80,49 +81,27 @@ namespace DDDiplom.Controllers
             return View();
         }
 
-        public IActionResult Export(int? id)
+        public async Task<IActionResult> Export(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = _context.Orders.Find(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+            var order = await _context.Orders
+               .Include(o => o.WorkPlace)
+               .Include(o => o.Client)
+               .Include(o => o.OrderProducts)
+               .FirstOrDefaultAsync(m => m.Id == id);
             ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
-            return View(order);
+            return new ViewAsPdf("Export", order);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Export(Order order, int Id)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Orders.FirstOrDefault(o => o.Id == Id).IsPaid = "да";
-                    _context.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", order.WorkPlaceId);
-            return View(order);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Export(Order order, int Id)
+        //{
+        //            _context.Orders.Include(o => o.WorkPlace)
+        //        .Include(o => o.Client)
+        //        .Include(o => o.OrderProducts).FirstOrDefault(o => o.Id == Id).IsPaid = "да";
+        //        _context.SaveChanges();          
+        //    return new ViewAsPdf("Export",order);
+        //}
 
         // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

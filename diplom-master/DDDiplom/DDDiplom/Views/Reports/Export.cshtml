@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DDDiplom.Models.Order>
+
+@{
+
+    Layout = null;
+}
+
+    <head>
+        <link href="~/css/site.css" rel="stylesheet" />
+        <link href="~/css/index.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/main.css" />
+        <link href="~/css/style.css" rel="stylesheet" />
+    </head>
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class='table__name'>
+                        Номер:
+                    </th>
+                    <th class='table__lname'>
+                        Клиент:
+                    </th>
+                    <th class='table__lname'>
+                        Дата заказа:
+                    </th>
+                    <th class='table__sname'>
+                        Итого:
+                    </th>
+                    <th class='table__sname'>
+                        Выдано:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class='table__name'>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class='table__lname'>
+                            @Html.DisplayFor(modelItem => item.Client.Surname) @Html.DisplayFor(modelItem => item.Client.Name) @Html.DisplayFor(modelItem => item.Client.Secondname)
+                        </td>
+                        <td class='table__sname'>
+                            @Html.DisplayFor(modelItem => item.OrderTime)
+                        </td>
+                        <td class='table__sname'>
+                            @Html.DisplayFor(modelItem => item.Summary) руб.
+                        </td>
+                        <td class='table__sname'>
+                            @Html.DisplayFor(modelItem => item.IsPaid)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

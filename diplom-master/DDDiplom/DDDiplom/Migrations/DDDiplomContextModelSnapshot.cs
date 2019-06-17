@@ -93,48 +93,38 @@ namespace DDDiplom.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("DDDiplom.Models.OrderProduct", b =>
+                {
+                    b.Property<int>("OrderdId");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("OrderdId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderProduct");
+                });
+
             modelBuilder.Entity("DDDiplom.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Amount");
+
                     b.Property<int?>("CategoryId");
 
                     b.Property<string>("Name");
-
-                    b.Property<int?>("OrderId");
 
                     b.Property<double>("Price");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("DDDiplom.Models.ProductList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CategoryId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<double>("Price");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("ProductLists");
                 });
 
             modelBuilder.Entity("DDDiplom.Models.Role", b =>
@@ -228,21 +218,23 @@ namespace DDDiplom.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("DDDiplom.Models.OrderProduct", b =>
+                {
+                    b.HasOne("DDDiplom.Models.Order", "Order")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderdId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DDDiplom.Models.Product", "Product")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DDDiplom.Models.Product", b =>
                 {
                     b.HasOne("DDDiplom.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("DDDiplom.Models.Order")
-                        .WithMany("OrderProducts")
-                        .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("DDDiplom.Models.ProductList", b =>
-                {
-                    b.HasOne("DDDiplom.Models.Category", "Category")
-                        .WithMany()
                         .HasForeignKey("CategoryId");
                 });
 

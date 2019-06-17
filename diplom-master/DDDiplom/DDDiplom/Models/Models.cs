@@ -60,16 +60,21 @@ namespace DDDiplom.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public Category Category { get; set; }
+        public int Amount { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
 
+        public Product()
+        {
+            OrderProducts = new List<OrderProduct>();
+        }
     }
 
-    public class ProductList
+    public class OrderProduct
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public int CategoryId { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
         public int OrderdId { get; set; }
+        public Order Order { get; set; }
 
     }
 
@@ -83,10 +88,11 @@ namespace DDDiplom.Models
         public WorkPlace WorkPlace { get; set; }
         public Client Client { get; set; }
         public int ClientId { get; set; }
-        public List<Product> OrderProducts { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
+
         public Order()
         {
-            OrderProducts = new List<Product>();
+            OrderProducts = new List<OrderProduct>();
         }
     }
     public class WorkPlace
@@ -135,10 +141,26 @@ namespace DDDiplom.Models
         public DbSet<WorkPlace> WorkPlaces { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<ProductList> ProductLists { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderProduct>()
+                .HasKey(t => new { t.OrderdId, t.ProductId });
+
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(sc => sc.Order)
+                .WithMany(s => s.OrderProducts)
+                .HasForeignKey(sc => sc.OrderdId);
+
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(sc => sc.Product)
+                .WithMany(c => c.OrderProducts)
+                .HasForeignKey(sc => sc.ProductId);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = DESKTOP-IIPACAR\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer("Server = DESKTOP-ITJHB8V\\SQLEXPRESS; Database = DDDiplomContext; Trusted_Connection = True;");
         }
     }
 }

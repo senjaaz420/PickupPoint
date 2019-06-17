@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using DDDiplom.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using DDDiplom.Services.GenerationRandomOrders;
+using Rotativa.AspNetCore;
 
 namespace DDDiplom
 {
@@ -75,7 +76,7 @@ namespace DDDiplom
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
+            RotativaConfiguration.Setup(env);
             GenerationRandomOrders generationRandomOrders = new GenerationRandomOrders();
         }
     }
