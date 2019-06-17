@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DDDiplom.Models;
+using DDDiplom.ViewModels.Account;
 
 namespace DDDiplom.Controllers
 {
@@ -36,7 +37,7 @@ namespace DDDiplom.Controllers
         // GET: UserProfiles/Details/5
 
         // GET: UserProfiles/Create
-        public IActionResult Create()
+        public IActionResult Register()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewBag.WorkPlace = new SelectList(_context.WorkPlaces, "Name", "Name");
@@ -46,36 +47,95 @@ namespace DDDiplom.Controllers
         // POST: UserProfiles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(UserProfile userProfile)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //_context.Add(userProfile);
+        //        _context.Users.Add(new User
+        //        {
+        //            Login = userProfile.User.Login,
+        //            Password = userProfile.User.Password,
+        //            RoleId = 2
+        //        });
+
+        //        _context.UserProfiles.Add(new UserProfile
+        //        {
+        //            Name = userProfile.Name,
+        //            Surname = userProfile.Surname,
+        //            Patronymic = userProfile.Patronymic,
+        //            Experience = userProfile.Experience,
+        //            UserId = _context.Users.LastOrDefault().Id,
+        //            WorkPlaceId = userProfile.WorkPlace.Id
+        //        });
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    return View(userProfile);
+        //}
+
+
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserProfile userProfile)
+        public async Task<IActionResult> Register(RegisterModel model, string hram)
         {
-            if (ModelState.IsValid)
+            Random rnd = new Random();
+            
+            if (!ModelState.IsValid)
             {
-                //_context.Add(userProfile);
-                _context.Users.Add(new Models.User
-                {
-                    Login = userProfile.User.Login,
-                    Password = userProfile.User.Password,
-                    RoleId = 2
-                });
-
-                _context.UserProfiles.Add(new UserProfile
-                {
-                    Name = userProfile.Name,
-                    Surname = userProfile.Surname,
-                    Patronymic = userProfile.Patronymic,
-                    Experience = userProfile.Experience,
-                    UserId = _context.Users.LastOrDefault().Id,
-                    WorkPlaceId = userProfile.WorkPlace.Id
-                });
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(model);
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", userProfile.UserId);
-            ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", userProfile.WorkPlaceId);
-            return View(userProfile);
+            
+            var user = new User
+            {
+              // Id = rnd.Next(1, 1000000000),
+               Login = model.Login,
+               Password = model.Password,
+               RoleId = 2     
+            };
+
+            _context.Add(user);
+            await _context.SaveChangesAsync();
+            List<User> dbUser = _context.Users.ToList();
+            WorkPlace workPlace = _context.WorkPlaces.SingleOrDefault(p=>p.Name == hram);
+            var userProfile = new UserProfile
+            {
+                //Id = rnd.Next(1,1000000000),
+                Name = model.Name,
+                Surname = model.Surname,
+                Patronymic = model.Patronymic,
+                Experience = model.Experience,
+                UserId = dbUser.Count(),
+                WorkPlaceId = workPlace.Id
+            };
+
+            _context.Add(userProfile);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "UserProfiles");
+            //    }
+            //        else
+            //        {
+            //            ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+            //        }
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", model.UserId);
+            //ViewData["WorkPlaceId"] = new SelectList(_context.WorkPlaces, "Id", "Id", model.WorkPlaceId);
+            //        return View(model);
         }
+
+
+
+
+
+
+
+
 
 
         // GET: UserProfiles/Edit/5

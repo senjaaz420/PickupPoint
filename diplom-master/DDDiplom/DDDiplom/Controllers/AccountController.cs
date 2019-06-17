@@ -41,14 +41,27 @@ namespace DIPLOM.Controllers
 
             if (user != null)
             {
-                await Authenticate(user); // аутентификация
+                try
+                {
+                    await Authenticate(user); // аутентификация
 
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                catch
+                {
+                    return View();
+                }
             }
-
-            ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-
+            try
+            {
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
             return View(model);
+
 
         }
 
@@ -58,38 +71,38 @@ namespace DIPLOM.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Register(RegisterModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
 
-            User user = await db.Users.FirstOrDefaultAsync(u => u.Login == model.Login);
+        //    User user = await db.Users.FirstOrDefaultAsync(u => u.Login == model.Login);
 
-            if (user == null)
-            {
-                // добавляем пользователя в бд
-                user = new User { Login = model.Login, Password = model.Password };
-                Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
-                if (userRole != null)
-                    user.Role = userRole;
+        //    if (user == null)
+        //    {
+        //        // добавляем пользователя в бд
+        //        user = new User { Login = model.Login, Password = model.Password };
+        //        Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+        //        if (userRole != null)
+        //            user.Role = userRole;
 
-                db.Users.Add(user);
-                await db.SaveChangesAsync();
+        //        db.Users.Add(user);
+        //        await db.SaveChangesAsync();
 
-                await Authenticate(user); // аутентификация
+        //        await Authenticate(user); // аутентификация
 
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-            }
-            return View(model);
-        }
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+        //    }
+        //    return View(model);
+        //}
 
         public async Task Authenticate(User user)
         {

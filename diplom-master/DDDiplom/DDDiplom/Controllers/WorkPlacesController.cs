@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DDDiplom.Models;
+using DDDiplom.ViewModels;
 
 namespace DDDiplom.Controllers
 {
@@ -68,19 +69,26 @@ namespace DDDiplom.Controllers
         // GET: WorkPlaces/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-           
+
             if (id == null)
             {
                 return NotFound();
             }
 
-           var workPlace = await _context.WorkPlaces.FindAsync(id);
+            var _workPlace = await _context.WorkPlaces.FindAsync(id);
+            var _address = await _context.Addresses.SingleOrDefaultAsync(p => p.Id == _workPlace.AddressId);
 
-            if (workPlace == null)
+            WorkAdressViewModel model = new WorkAdressViewModel
+            {
+                workPlace = _workPlace,
+                address = _address
+            };
+
+            if (_workPlace == null && _address == null)
             {
                 return NotFound();
             }
-            return View(workPlace);
+            return View(model);
         }
 
         // POST: WorkPlaces/Edit/5
@@ -99,8 +107,19 @@ namespace DDDiplom.Controllers
             {
                 try
                 {
-                    _context.Update(workPlace);
-                    _context.Update(address);
+                    WorkPlace _workPlace = _context.WorkPlaces.SingleOrDefault(p=>p.Id == workPlace.Id);
+                    _workPlace.Name = workPlace.Name;             
+                    // _workPlace.
+                    Address _address = new Address
+                    {
+                        Id = _workPlace.AddressId,
+                        City = address.City,
+                        Street = address.Street,
+                        BuildingNumber = address.BuildingNumber
+                    };
+                    _context.Update(_address);
+                    _context.Update(_workPlace);
+                    
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

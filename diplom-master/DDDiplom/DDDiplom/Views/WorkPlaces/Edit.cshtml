@@ -1,4 +1,4 @@
-﻿@model DDDiplom.Models.WorkPlace
+﻿@model DDDiplom.ViewModels.WorkAdressViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -20,25 +20,25 @@
     <hr class="nav-line" noshade>
     <form asp-action="Edit" id='form'>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="workPlace.Id" />
         <div class="form-group">
-            <label id='lname' asp-for="Name">Имя:</label><input type="text" asp-for="Name" id="name"><span asp-validation-for="Name" id="name"></span>
+            <label id='lname' asp-for="workPlace.Name">Имя:</label><input type="text" asp-for="workPlace.Name" id="name"><input /><span asp-validation-for="workPlace.Name" id="name"></span>
         </div>
         <div class="form-group">
-            <label id='lsurname' asp-for="Address.City">Город:</label><input type="text" asp-for="Address.City" id='surname'><span asp-validation-for="Address.City" id='surname'></span>
+            <label id='lsurname' asp-for="address.City">Город:</label><input type="text" asp-for="address.City" id='surname'><input /><span asp-validation-for="address.City" id='surname'></span>
         </div>
         <div class="form-group">
-            <label id='lpatronymic' asp-for="Address.Street">Улица:</label><input type="text" asp-for="Address.Street" id='patronymic'><span asp-validation-for="Address.Street" id='patronymic'></span>
+            <label id='lpatronymic' asp-for="address.Street">Улица:</label><input type="text" asp-for="address.Street" id='patronymic'><input /><span asp-validation-for="address.Street" id='patronymic'></span>
         </div>
         <div class="form-group">
-            <label id='lexperience' asp-for="Address.BuildingNumber">Квартира:</label><input type="text" asp-for="Address.BuildingNumber" id='experience'><span asp-validation-for="Address.BuildingNumber" id='experience'></span>
+            <label id='lexperience' asp-for="address.BuildingNumber">Квартира:</label><input type="text" asp-for="address.BuildingNumber" id='experience'><input /><span asp-validation-for="address.BuildingNumber" id='experience'></span>
         </div>
         <input type="submit" id='sbmt-button' value="Сохранить" />
 
     </form>
     <form asp-action="Delete" id="form">
         <br>
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="workPlace.Id" />
         <input type="submit" value="Удалить" id='sbmt-button' />
     </form>
 </div>

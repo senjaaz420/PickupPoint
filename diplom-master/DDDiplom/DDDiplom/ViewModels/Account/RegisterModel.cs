@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDDiplom.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +19,15 @@ namespace DDDiplom.ViewModels.Account
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
+
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Patronymic { get; set; }
+        public int Experience { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public int WorkPlaceId { get; set; }
+        public WorkPlace WorkPlace { get; set; }
 
     }
 }
